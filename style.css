@@ -1,0 +1,431 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ========== Header / Navbar (Fixed) ========== */
+ /* Header */
+        header {
+            background: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            height: 92px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .logo h1 {
+            color: #5aed61;
+            font-size: 2.5rem;
+            margin-left: 4px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #5aed61;
+            font-weight: 600;
+            font-size: 1.75rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff9b2f;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang {
+            background: white;
+            border: 2px solid #5aed61;
+            color: #5aed61;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang:hover {
+            background: #5aed61;
+            color: white;
+        }
+
+/* ========== Footer ========== */
+footer {
+    background: #78c841;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.footer-comments {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.footer-comments input,
+.footer-comments textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.footer-comments button {
+    align-self: flex-end;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    background: #ff9b2f;
+    color: white;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* ========== Homepage: Welcome Section ========== */
+.welcome {
+    position: relative;
+    height: calc(100vh - 92px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.welcome-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+}
+
+.welcome-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #fff;
+}
+
+.welcome-left h1 {
+    font-size: 3.5rem;
+    /* Bigger title */
+    color: #2e7d32;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+    animation: fadeInUp 1s ease-out;
+}
+
+.welcome-left h3 {
+    font-size: 1.5rem;
+    color: #2e7d32;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.fun-btn {
+    background: linear-gradient(135deg, #ff9b2f 0%, #ff6b35 100%);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 22px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.fun-btn:hover {
+    transform: scale(1.05);
+}
+
+.play-stop-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.play-stop-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.play-stop-btn svg {
+    fill: white;
+    width: 26px;
+    height: 26px;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== Homepage: Why Us & Testimonials ========== */
+.why-us,
+.testimonials {
+    padding: 60px 20px;
+}
+
+.why-us {
+    background: linear-gradient(180deg, #f8f9fa 0%, #e8f5e9 100%);
+}
+
+.titre h2,
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 40px;
+}
+
+.reasons,
+.testimonial-slider {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reason-card,
+.testimonial {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.reason-card:hover,
+.testimonial:hover {
+    transform: translateY(-5px);
+}
+
+.reason-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.reason-card h3 {
+    color: #ff9b2f;
+    margin: 12px 0;
+    font-size: 1.5rem;
+}
+
+.reason-card p,
+.testimonial p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.testimonial h4 {
+    margin-top: 15px;
+    color: #5aed61;
+    font-weight: bold;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 800px) {
+    nav ul {
+        display: none;
+        /* Mobile menu logic would go here */
+    }
+
+    .welcome-inner {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo h1 {
+        display: none;
+        /* Hide text on small screens if needed */
+    }
+
+    .logo img {
+        height: 40px;
+    }
+}
+
+/* ========== Utilities ========== */
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.ltr {
+    direction: ltr;
+    text-align: left;
+}
+/* ------------------ HAMBURGER MENU ------------------ */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #5aed61;
+    border-radius: 5px;
+}
+
+/* Mobile navbar */
+nav ul.mobile-active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 92px;
+    right: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 0;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ------------------ FULL RESPONSIVE ------------------ */
+@media (max-width: 950px) {
+    nav ul {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .welcome-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .welcome-left h1 {
+        font-size: 2.3rem;
+    }
+
+    .welcome-left h3 {
+        font-size: 1.3rem;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .reasons, .testimonial-slider {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .reason-card, .testimonial {
+        width: 90%;
+    }
+
+    .logo h1 {
+        display: none;
+    }
+}
+
+/* Ultra-small screens */
+@media (max-width: 500px) {
+    .fun-btn {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+
+    header {
+        height: 80px;
+        padding: 10px 16px;
+    }
+
+    .background-video {
+        height: 100%;
+    }
+}

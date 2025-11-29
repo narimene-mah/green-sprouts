@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Games - Green Sprouts</title>
+    <link rel="stylesheet" href="games.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo" id="logo-text">
+            <img src="logo.png" alt="logo" />
+            <h1 id="logo-title">🌱 Green Sprouts</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="lesson.html" id="nav-lessons">Lessons</a></li>
+                <li><a href="games.html" id="nav-games" class="active">Games</a></li>
+                <li><a href="idea.html" id="nav-ideas">Ideas</a></li>
+                <li><a href="profile.html" id="nav-profile">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="lang-switcher">
+            <button class="lang" id="lang-en" onclick="setLanguage('en')">English</button>
+            <button class="lang" id="lang-ar" onclick="setLanguage('ar')">العربية</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2 id="hero-title">Play & Learn</h2>
+            <p id="hero-text">Have fun while saving the planet! Challenge yourself with our eco-friendly games.</p>
+        </section>
+
+        <section class="games-section">
+            <h2 class="section-title" id="section-title">Choose Your Adventure</h2>
+            <div class="grid">
+                <!-- Puzzle Game -->
+                <div class="card">
+                    <img src="game_puzzle.png" alt="Eco Puzzle">
+                    <div class="card-content">
+                        <h3 id="game-puzzle-title">Eco-Puzzle Challenge</h3>
+                        <p id="game-puzzle-text">Piece together beautiful nature scenes and learn about recycling
+                            symbols. Can you solve them all?</p>
+                        <a href="./games/puzzlegame.html" class="play-btn" id="btn-play-1">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Waste Sorting Game -->
+                <div class="card">
+                    <img src="game_sorting.png" alt="Waste Sorting">
+                    <div class="card-content">
+                        <h3 id="game-sorting-title">Waste Sorting Adventure</h3>
+                        <p id="game-sorting-text">Help the hungry bins! Drag and drop the trash items into the correct
+                            recycling bin. Be quick!</p>
+                        <a href="./games/gameSortingAdventure.html" class="play-btn" id="btn-play-2">Play Now</a>
+                    </div>
+                </div>
+
+                <!-- Maze Game -->
+                <div class="card">
+                    <img src="game_maze.png" alt="Green Maze">
+                    <div class="card-content">
+                        <h3 id="game-maze-title">Green Maze Run</h3>
+                        <p id="game-maze-text">Guide our hero through the maze to find the recycling center. Watch out
+                            for the litter monsters!</p>
+                        <a href="./games/gamemaze.html" class="play-btn" id="btn-play-3">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-comments">
+            <h3 id="comments-title">Send us a comment</h3>
+            <form id="comment-form">
+                <input type="text" id="name" placeholder="Your name" required />
+                <textarea id="comment" placeholder="Your comment" required></textarea>
+                <button id="submit-btn" type="submit" class="fun-btn">Send</button>
+            </form>
+        </div>
+        <p id="footer-text">&copy; 2025 Green Sprouts. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                logoTitle: "🌱 Green Sprouts",
+                navHome: "Home",
+                navLessons: "Lessons",
+                navGames: "Games",
+                navIdeas: "Ideas",
+                navProfile: "Profile",
+                heroTitle: "Play & Learn",
+                heroText: "Have fun while saving the planet! Challenge yourself with our eco-friendly games.",
+                sectionTitle: "Choose Your Adventure",
+
+                gamePuzzleTitle: "Eco-Puzzle Challenge",
+                gamePuzzleText: "Piece together beautiful nature scenes and learn about recycling symbols. Can you solve them all?",
+
+                gameSortingTitle: "Waste Sorting Adventure",
+                gameSortingText: "Help the hungry bins! Drag and drop the trash items into the correct recycling bin. Be quick!",
+
+                gameMazeTitle: "Green Maze Run",
+                gameMazeText: "Guide our hero through the maze to find the recycling center. Watch out for the litter monsters!",
+
+                playBtn: "Play Now",
+
+                commentsTitle: "Send us a comment",
+                placeholderName: "Your name",
+                placeholderComment: "Your comment",
+                submitBtn: "Send",
+                footerText: "&copy; 2025 Green Sprouts. All rights reserved."
+            },
+            ar: {
+                logoTitle: "🌱 براعم خضراء",
+                navHome: "الرئيسية",
+                navLessons: "دروس",
+                navGames: "ألعاب",
+                navIdeas: "أفكار",
+                navProfile: "الملف الشخصي",
+                heroTitle: "العب وتعلم",
+                heroText: "استمتع بوقتك بينما تنقذ الكوكب! تحدى نفسك مع ألعابنا الصديقة للبيئة.",
+                sectionTitle: "اختر مغامرتك",
+
+                gamePuzzleTitle: "تحدي اللغز البيئي",
+                gamePuzzleText: "قم بتجميع مشاهد طبيعية جميلة وتعلم عن رموز إعادة التدوير. هل يمكنك حلها جميعًا؟",
+
+                gameSortingTitle: "مغامرة فرز النفايات",
+                gameSortingText: "ساعد الصناديق الجائعة! اسحب وأسقط عناصر القمامة في صندوق إعادة التدوير الصحيح. كن سريعًا!",
+
+                gameMazeTitle: "سباق المتاهة الخضراء",
+                gameMazeText: "وجه بطلنا عبر المتاهة للعثور على مركز إعادة التدوير. احترس من وحوش القمامة!",
+
+                playBtn: "العب الآن",
+
+                commentsTitle: "أرسل لنا تعليقًا",
+                placeholderName: "اسمك",
+                placeholderComment: "تعليقك",
+                submitBtn: "إرسال",
+                footerText: "&copy; 2025 براعم خضراء. جميع الحقوق محفوظة."
+            }
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+            document.getElementById('logo-title').innerText = t.logoTitle;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-lessons').innerText = t.navLessons;
+            document.getElementById('nav-games').innerText = t.navGames;
+            document.getElementById('nav-ideas').innerText = t.navIdeas;
+            document.getElementById('nav-profile').innerText = t.navProfile;
+
+            document.getElementById('hero-title').innerText = t.heroTitle;
+            document.getElementById('hero-text').innerText = t.heroText;
+            document.getElementById('section-title').innerText = t.sectionTitle;
+
+            document.getElementById('game-puzzle-title').innerText = t.gamePuzzleTitle;
+            document.getElementById('game-puzzle-text').innerText = t.gamePuzzleText;
+
+            document.getElementById('game-sorting-title').innerText = t.gameSortingTitle;
+            document.getElementById('game-sorting-text').innerText = t.gameSortingText;
+
+            document.getElementById('game-maze-title').innerText = t.gameMazeTitle;
+            document.getElementById('game-maze-text').innerText = t.gameMazeText;
+
+            document.getElementById('btn-play-1').innerText = t.playBtn;
+            document.getElementById('btn-play-2').innerText = t.playBtn;
+            document.getElementById('btn-play-3').innerText = t.playBtn;
+
+            document.getElementById('comments-title').innerText = t.commentsTitle;
+            document.getElementById('name').placeholder = t.placeholderName;
+            document.getElementById('comment').placeholder = t.placeholderComment;
+            document.getElementById('submit-btn').innerText = t.submitBtn;
+            document.getElementById('footer-text').innerHTML = t.footerText;
+
+            // Save language preference
+            localStorage.setItem('lang', lang);
+        }
+
+        // Initialize - Load saved language preference
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLanguage(savedLang);
+        function toggleMenu() {
+            const menu = document.querySelector("nav ul");
+            menu.classList.toggle("mobile-active");
+        }
+    </script>
+
+</body>
+
+</html>

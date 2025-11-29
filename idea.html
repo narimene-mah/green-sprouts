@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycling Ideas - Green Sprouts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            height: 92px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .logo h1 {
+            color: #5aed61;
+            font-size: 2.5rem;
+            margin-left: 4px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #5aed61;
+            font-weight: 600;
+            font-size: 1.75rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff9b2f;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang {
+            background: white;
+            border: 2px solid #5aed61;
+            color: #5aed61;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang:hover {
+            background: #5aed61;
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 92px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(90, 237, 97, 0.1) 0%, transparent 70%);
+            animation: rotate 60s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            color: #5aed61;
+            margin-bottom: 20px;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #555;
+            max-width: 800px;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ideas Grid */
+        .ideas-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #ff9b2f;
+            margin-bottom: 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            color: #5aed61;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .view-steps-btn {
+            background: #5aed61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .view-steps-btn:hover {
+            background: #47c24d;
+        }
+
+        /* Call to Action */
+        .cta {
+            background: #78c841;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+
+        .cta p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff9b2f;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #e68a25;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #78c841;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .footer-comments {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer-comments h3 {
+            font-size: 1.5rem;
+        }
+
+        .footer-comments input,
+        .footer-comments textarea {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .footer-comments button {
+            align-self: flex-end;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: none;
+            background: #ff9b2f;
+            color: white;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 36px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .modal-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-text {
+            flex: 2;
+            padding-left: 0;
+        }
+
+        .modal-text h2 {
+            color: #5aed61;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .steps-container h3 {
+            color: #ff9b2f;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .steps-container ol {
+            list-style-type: decimal;
+            padding-left: 25px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .steps-container ol li {
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .modal-body {
+                flex-direction: row;
+            }
+
+            .modal-text {
+                padding-left: 30px;
+            }
+        }
+           /* Hamburger button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #5aed61;
+    border-radius: 5px;
+}
+
+/* Mobile navbar */
+nav ul.mobile-active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 92px;
+    right: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 0;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ------------------ FULL RESPONSIVE ------------------ */
+@media (max-width: 950px) {
+    nav ul {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+
+  nav ul.active {
+    right: 0; /* visible */
+  }
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo" id="logo-text">
+            <img src="logo.png" alt="logo" />
+            <h1 id="logo-title">🌱 Green Sprouts</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="lesson.html" id="nav-lessons">Lessons</a></li>
+                <li><a href="games.html" id="nav-games">Games</a></li>
+                <li><a href="idea.html" id="nav-ideas" class="active">Ideas</a></li>
+                <li><a href="profile.html" id="nav-profile">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="lang-switcher">
+            <button class="lang" id="lang-en" onclick="setLanguage('en')">English</button>
+            <button class="lang" id="lang-ar" onclick="setLanguage('ar')">العربية</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2 id="hero-title">Reimagine Waste</h2>
+            <p id="hero-text">Discover creative ways to turn everyday trash into treasure. Join the movement to reduce,
+                reuse, and
+                recycle!</p>
+        </section>
+
+        <section class="ideas-section">
+            <h2 class="section-title" id="section-title">Creative Recycling Ideas</h2>
+            <div class="grid">
+                <div class="card" onclick="openModal('bunny')">
+                    <img src="pic1.jpg" alt="Bunny Pencil Holder">
+                    <div class="card-content">
+                        <h3 id="card-bunny-title">Bunny Pencil Holder</h3>
+                        <p id="card-bunny-text">Recycle toilet paper rolls into adorable bunny-shaped pencil holders. A
+                            fun and easy craft
+                            for organizing your desk!</p>
+                        <button class="view-steps-btn" id="btn-view-1">View Steps</button>
+                    </div>
+                </div>
+                <div class="card" onclick="openModal('sorting')">
+                    <img src="pic2.jpg" alt="Recycling Station">
+                    <div class="card-content">
+                        <h3 id="card-sorting-title">Organized Sorting</h3>
+                        <p id="card-sorting-text">Make recycling easy and fun by setting up a colorful sorting station
+                            at home. Label bins
+                            clearly for paper, plastic, glass, and metal to ensure everything goes to the right place.
+                        </p>
+                        <button class="view-steps-btn" id="btn-view-2">View Steps</button>
+                    </div>
+                </div>
+                <div class="card" onclick="openModal('robot')">
+                    <img src="pic3.jpg" alt="Cardboard Robot">
+                    <div class="card-content">
+                        <h3 id="card-robot-title">Cardboard Creations</h3>
+                        <p id="card-robot-text">Unleash your inner engineer! Old cardboard boxes and bottle caps can be
+                            transformed into
+                            amazing toys and robots. A perfect rainy day activity for kids and adults alike.</p>
+                        <button class="view-steps-btn" id="btn-view-3">View Steps</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2 id="cta-title">Start Your Journey Today</h2>
+            <p id="cta-text">Small changes make a big difference. What will you create?</p>
+            <a href="#" class="btn" id="cta-btn">Share Your Idea</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-comments">
+            <h3 id="comments-title">Send us a comment</h3>
+            <form id="comment-form">
+                <input type="text" id="name" placeholder="Your name" required />
+                <textarea id="comment" placeholder="Your comment" required></textarea>
+                <button id="submit-btn" type="submit" class="fun-btn">Send</button>
+            </form>
+        </div>
+        <p id="footer-text">&copy; 2025 Green Sprouts. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="ideaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImg" src="" alt="Idea Image">
+                </div>
+                <div class="modal-text">
+                    <h2 id="modalTitle"></h2>
+                    <div class="steps-container">
+                        <h3 id="modal-steps-title">Steps to Recycle:</h3>
+                        <ol id="modalSteps"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                logoTitle: "🌱 Green Sprouts",
+                navHome: "Home",
+                navLessons: "Lessons",
+                navGames: "Games",
+                navIdeas: "Ideas",
+                navProfile: "Profile",
+                heroTitle: "Reimagine Waste",
+                heroText: "Discover creative ways to turn everyday trash into treasure. Join the movement to reduce, reuse, and recycle!",
+                sectionTitle: "Creative Recycling Ideas",
+                cardBunnyTitle: "Bunny Pencil Holder",
+                cardBunnyText: "Recycle toilet paper rolls into adorable bunny-shaped pencil holders. A fun and easy craft for organizing your desk!",
+                cardSortingTitle: "Organized Sorting",
+                cardSortingText: "Make recycling easy and fun by setting up a colorful sorting station at home. Label bins clearly for paper, plastic, glass, and metal to ensure everything goes to the right place.",
+                cardRobotTitle: "Cardboard Creations",
+                cardRobotText: "Unleash your inner engineer! Old cardboard boxes and bottle caps can be transformed into amazing toys and robots. A perfect rainy day activity for kids and adults alike.",
+                viewSteps: "View Steps",
+                ctaTitle: "Start Your Journey Today",
+                ctaText: "Small changes make a big difference. What will you create?",
+                ctaBtn: "Share Your Idea",
+                commentsTitle: "Send us a comment",
+                placeholderName: "Your name",
+                placeholderComment: "Your comment",
+                submitBtn: "Send",
+                footerText: "&copy; 2025 Green Sprouts. All rights reserved.",
+                modalStepsTitle: "Steps to Recycle:",
+
+                // Modal Content Data
+                bunny: {
+                    title: "Bunny Pencil Holder",
+                    steps: [
+                        "Paint the toilet paper roll or wrap it in colored paper.",
+                        "Cut out ears and feet from cardboard or thick paper.",
+                        "Draw a cute bunny face with markers.",
+                        "Glue the ears to the top and feet to the bottom.",
+                        "Add a cotton ball tail for extra cuteness!"
+                    ],
+                    img: "pic1.jpg"
+                },
+                sorting: {
+                    title: "Organized Sorting",
+                    steps: [
+                        "Choose a dedicated space for recycling.",
+                        "Get separate bins or boxes for Paper, Plastic, Glass, and Metal.",
+                        "Label each bin clearly with icons or text.",
+                        "Rinse containers before sorting.",
+                        "Empty bins regularly into the main recycling collection."
+                    ],
+                    img: "pic2.jpg"
+                },
+                robot: {
+                    title: "Cardboard Creations",
+                    steps: [
+                        "Gather clean cardboard boxes and bottle caps.",
+                        "Plan your robot design on paper.",
+                        "Cut the cardboard into body parts (head, torso, arms, legs).",
+                        "Use hot glue or tape to assemble the parts.",
+                        "Decorate with bottle caps for eyes and buttons!"
+                    ],
+                    img: "pic3.jpg"
+                }
+            },
+            ar: {
+                logoTitle: "🌱 براعم خضراء",
+                navHome: "الرئيسية",
+                navLessons: "دروس",
+                navGames: "ألعاب",
+                navIdeas: "أفكار",
+                navProfile: "الملف الشخصي",
+                heroTitle: "أعد تخيل النفايات",
+                heroText: "اكتشف طرقًا إبداعية لتحويل النفايات اليومية إلى كنوز. انضم إلى الحركة للتقليل، وإعادة الاستخدام، وإعادة التدوير!",
+                sectionTitle: "أفكار إبداعية لإعادة التدوير",
+                cardBunnyTitle: "حامل أقلام الأرنب",
+                cardBunnyText: "أعد تدوير لفات ورق التواليت إلى حوامل أقلام رائعة على شكل أرنب. حرفة ممتعة وسهلة لتنظيم مكتبك!",
+                cardSortingTitle: "فرز منظم",
+                cardSortingText: "اجعل إعادة التدوير سهلة وممتعة من خلال إعداد محطة فرز ملونة في المنزل. قم بتسمية الصناديق بوضوح للورق والبلاستيك والزجاج والمعدن لضمان ذهاب كل شيء إلى المكان الصحيح.",
+                cardRobotTitle: "إبداعات الكرتون",
+                cardRobotText: "أطلق العنان للمهندس بداخلك! يمكن تحويل صناديق الكرتون القديمة وأغطية الزجاجات إلى ألعاب وروبوتات مذهلة. نشاط مثالي للأيام الممطرة للأطفال والكبار على حد سواء.",
+                viewSteps: "عرض الخطوات",
+                ctaTitle: "ابدأ رحلتك اليوم",
+                ctaText: "تغييرات صغيرة تصنع فرقًا كبيرًا. ماذا ستبتكر؟",
+                ctaBtn: "شارك فكرتك",
+                commentsTitle: "أرسل لنا تعليقًا",
+                placeholderName: "اسمك",
+                placeholderComment: "تعليقك",
+                submitBtn: "إرسال",
+                footerText: "&copy; 2025 براعم خضراء. جميع الحقوق محفوظة.",
+                modalStepsTitle: "خطوات إعادة التدوير:",
+
+                // Modal Content Data
+                bunny: {
+                    title: "حامل أقلام الأرنب",
+                    steps: [
+                        "قم بطلاء لفة ورق التواليت أو لفها بورق ملون.",
+                        "قص الأذنين والقدمين من الكرتون أو الورق المقوى.",
+                        "ارسم وجه أرنب لطيف باستخدام الأقلام.",
+                        "ألصق الأذنين في الأعلى والقدمين في الأسفل.",
+                        "أضف ذيلًا من القطن لمزيد من اللطافة!"
+                    ],
+                    img: "pic1.jpg"
+                },
+                sorting: {
+                    title: "فرز منظم",
+                    steps: [
+                        "اختر مساحة مخصصة لإعادة التدوير.",
+                        "احصل على صناديق منفصلة للورق والبلاستيك والزجاج والمعدن.",
+                        "قم بتسمية كل صندوق بوضوح باستخدام أيقونات أو نص.",
+                        "اشطف الحاويات قبل الفرز.",
+                        "أفرغ الصناديق بانتظام في مجموعة إعادة التدوير الرئيسية."
+                    ],
+                    img: "pic2.jpg"
+                },
+                robot: {
+                    title: "إبداعات الكرتون",
+                    steps: [
+                        "اجمع صناديق الكرتون النظيفة وأغطية الزجاجات.",
+                        "خطط لتصميم الروبوت الخاص بك على الورق.",
+                        "قص الكرتون إلى أجزاء الجسم (الرأس، الجذع، الذراعين، الساقين).",
+                        "استخدم الغراء الساخن أو الشريط اللاصق لتجميع الأجزاء.",
+                        "زيّن بأغطية الزجاجات للعيون والأزرار!"
+                    ],
+                    img: "pic3.jpg"
+                }
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            const t = translations[lang];
+
+            // Direction and Fonts
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+
+            // Update Text Content
+            document.getElementById('logo-title').innerText = t.logoTitle;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-lessons').innerText = t.navLessons;
+            document.getElementById('nav-games').innerText = t.navGames;
+            document.getElementById('nav-ideas').innerText = t.navIdeas;
+            document.getElementById('nav-profile').innerText = t.navProfile;
+            document.getElementById('hero-title').innerText = t.heroTitle;
+            document.getElementById('hero-text').innerText = t.heroText;
+            document.getElementById('section-title').innerText = t.sectionTitle;
+
+            document.getElementById('card-bunny-title').innerText = t.cardBunnyTitle;
+            document.getElementById('card-bunny-text').innerText = t.cardBunnyText;
+            document.getElementById('card-sorting-title').innerText = t.cardSortingTitle;
+            document.getElementById('card-sorting-text').innerText = t.cardSortingText;
+            document.getElementById('card-robot-title').innerText = t.cardRobotTitle;
+            document.getElementById('card-robot-text').innerText = t.cardRobotText;
+
+            document.getElementById('btn-view-1').innerText = t.viewSteps;
+            document.getElementById('btn-view-2').innerText = t.viewSteps;
+            document.getElementById('btn-view-3').innerText = t.viewSteps;
+            document.getElementById('modalTitle').innerText = data.title;
+
+            const stepsList = document.getElementById('modalSteps');
+            stepsList.innerHTML = '';
+            data.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerText = step;
+                stepsList.appendChild(li);
+            });
+
+            document.getElementById('ideaModal').style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            document.getElementById('ideaModal').style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('ideaModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize - Load saved language preference
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLanguage(savedLang);
+        function toggleMenu() {
+            const menu = document.querySelector("nav ul");
+            menu.classList.toggle("mobile-active");
+        }
+    </script>
+
+</body>
+
+</html>

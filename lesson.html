@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - Green Sprouts</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            height: 92px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        .logo h1 {
+            color: #5aed61;
+            font-size: 2.5rem;
+            margin-left: 4px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #5aed61;
+            font-weight: 600;
+            font-size: 1.75rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff9b2f;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang {
+            background: white;
+            border: 2px solid #5aed61;
+            color: #5aed61;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang:hover {
+            background: #5aed61;
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 92px;
+            min-height: 80vh;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            color: #5aed61;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Video Section */
+        .video-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .video-player {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            background: #000;
+        }
+
+        .video-info {
+            text-align: left;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .video-info h2 {
+            color: #5aed61;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .video-info p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .quiz-btn {
+            background: #ff9b2f;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 155, 47, 0.3);
+        }
+
+        .quiz-btn:hover {
+            transform: scale(1.05);
+            background: #e68a25;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 36px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        /* Dynamic Quiz Styles */
+        .quiz-container {
+            text-align: left;
+        }
+
+        .quiz-progress {
+            margin-bottom: 20px;
+            color: #888;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            padding: 15px;
+            background: #f4fbf4;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .option-item:hover {
+            background: #e0f7e0;
+            border-color: #5aed61;
+        }
+
+        .option-item.selected {
+            background: #d0f0d0;
+            border-color: #5aed61;
+            font-weight: bold;
+        }
+
+        .option-item.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .option-item.wrong {
+            background: #ffcdd2;
+            border-color: #e57373;
+            color: #c62828;
+        }
+
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            color: #0d47a1;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-controls {
+            margin-top: 25px;
+            text-align: right;
+        }
+
+        .action-btn {
+            background: #5aed61;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #47c24d;
+        }
+
+        .action-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .quiz-result-final {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .quiz-result-final h2 {
+            color: #5aed61;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-result-final p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: #78c841;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-comments {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer-comments h3 {
+            font-size: 1.5rem;
+        }
+
+        .footer-comments input,
+        .footer-comments textarea {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .footer-comments button {
+            align-self: flex-end;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: none;
+            background: #ff9b2f;
+            color: white;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        /* Hamburger button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #5aed61;
+    border-radius: 5px;
+}
+
+/* Mobile navbar */
+nav ul.mobile-active {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 92px;
+    right: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 0;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ------------------ FULL RESPONSIVE ------------------ */
+@media (max-width: 950px) {
+    nav ul {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+
+  nav ul.active {
+    right: 0; /* visible */
+  }
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="logo" />
+            <h1 id="logo-title">🌱 Green Sprouts</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="lesson.html" id="nav-lessons" class="active">Lessons</a></li>
+                <li><a href="games.html" id="nav-games">Games</a></li>
+                <li><a href="idea.html" id="nav-ideas">Ideas</a></li>
+                <li><a href="profile.html" id="nav-profile">Profile</a></li>
+            </ul>
+        </nav>
+       <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+        <div class="lang-switcher">
+            <button class="lang" id="lang-en" onclick="setLanguage('en')">English</button>
+            <button class="lang" id="lang-ar" onclick="setLanguage('ar')">العربية</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2 id="hero-title" class="animate-fade-up">The Ultimate Recycling Guide</h2>
+            <p id="hero-text" class="animate-fade-up delay-1">Watch, learn, and become a recycling superhero! 🌍♻️</p>
+        </section>
+
+        <section class="video-container animate-fade-up delay-2">
+            <video id="lesson-video" class="video-player" controls poster="sprouty.jpg">
+                <source id="video-source" src="Design_sans_titre.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-info">
+                <h2 id="video-title">About This Lesson</h2>
+                <p id="video-desc1">In this video, you'll learn everything about recycling - from sorting your waste to
+                    understanding what happens to recycled materials.</p>
+                <p id="video-desc2">Discover how paper, plastic, glass, and metal get transformed into new products, and
+                    learn
+                    why recycling is so important for our planet.</p>
+            </div>
+        </section>
+
+        <section class="quiz-section animate-fade-up delay-3">
+            <button id="openQuizBtn" class="quiz-btn">Start Quiz 🎮</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-comments">
+            <h3 id="comments-title">Send us a comment</h3>
+            <form id="comment-form">
+                <input type="text" id="name" placeholder="Your name" required />
+                <textarea id="comment" placeholder="Your comment" required></textarea>
+                <button id="submit-btn" type="submit">Send</button>
+            </form>
+        </div>
+        <p id="footer-text">&copy; 2025 Green Sprouts. All rights reserved.</p>
+    </footer>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span id="closeQuiz" class="close">&times;</span>
+            <h2 style="text-align: center; color: #5aed61; margin-bottom: 20px;" id="quiz-title">♻️ Recycling Quiz</h2>
+
+            <div id="quiz-container" class="quiz-container">
+                <!-- Dynamic Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script>
+        const quizData = {
+            en: [
+                {
+                    question: "What is recycling?",
+                    options: ["Giving new life to our waste", "Throwing everything in the same bin", "Buying new things all the time"],
+                    correct: 0,
+                    explanation: "Recycling means giving new life to our waste instead of throwing it away!"
+                },
+                {
+                    question: "What does recycling help protect?",
+                    options: ["Our planet, animals and the air we breathe", "Only our homes", "Only the oceans"],
+                    correct: 0,
+                    explanation: "Recycling helps protect our planet, animals and even the air we breathe!"
+                },
+                {
+                    question: "Which bin is for glass bottles and jars?",
+                    options: ["Green bin", "Yellow bin", "Blue bin"],
+                    correct: 0,
+                    explanation: "The green bin is for glass, like bottles and jars!"
+                },
+                {
+                    question: "Which bin is for paper and cardboard?",
+                    options: ["Blue bin", "Yellow bin", "Gray bin"],
+                    correct: 0,
+                    explanation: "Blue bin is for paper and cardboard!"
+                },
+                {
+                    question: "Which bin is for plastic and cans?",
+                    options: ["Yellow bin", "Green bin", "Blue bin"],
+                    correct: 0,
+                    explanation: "The yellow bin is for plastic and cans!"
+                },
+                {
+                    question: "What can we make from recycled materials?",
+                    options: ["Notebooks, toys and clothes", "Only new bottles", "Only plastic bags"],
+                    correct: 0,
+                    explanation: "We can make notebooks, toys or even clothes from recycled materials!"
+                }
+            ],
+            ar: [
+                {
+                    question: "ما هي إعادة التدوير؟",
+                    options: ["إعطاء حياة جديدة لنفاياتنا", "رمي كل شيء في نفس الصندوق", "شراء أشياء جديدة طوال الوقت"],
+                    correct: 0,
+                    explanation: "إعادة التدوير تعني إعطاء حياة جديدة لنفاياتنا بدلاً من رميها!"
+                },
+                {
+                    question: "ماذا تساعد إعادة التدوير في حمايته؟",
+                    options: ["كوكبنا، والحيوانات، والهواء الذي نتنفسه", "منازلنا فقط", "المحيطات فقط"],
+                    correct: 0,
+                    explanation: "تساعد إعادة التدوير في حماية كوكبنا وحيواناتنا وحتى الهواء الذي نتنفسه!"
+                },
+                {
+                    question: "أي صندوق مخصص للزجاجات والجرار الزجاجية؟",
+                    options: ["الصندوق الأخضر", "الصندوق الأصفر", "الصندوق الأزرق"],
+                    correct: 0,
+                    explanation: "الصندوق الأخضر مخصص للزجاج، مثل الزجاجات والجرار!"
+                },
+                {
+                    question: "أي صندوق مخصص للورق والكرتون؟",
+                    options: ["الصندوق الأزرق", "الصندوق الأصفر", "الصندوق الرمادي"],
+                    correct: 0,
+                    explanation: "الصندوق الأزرق مخصص للورق والكرتون!"
+                },
+                {
+                    question: "أي صندوق مخصص للبلاستيك والعلب؟",
+                    options: ["الصندوق الأصفر", "الصندوق الأخضر", "الصندوق الأزرق"],
+                    correct: 0,
+                    explanation: "الصندوق الأصفر مخصص للبلاستيك والعلب!"
+                },
+                {
+                    question: "ماذا يمكننا أن نصنع من المواد المعاد تدويرها؟",
+                    options: ["دفاتر، ألعاب وملابس", "زجاجات جديدة فقط", "أكياس بلاستيكية فقط"],
+                    correct: 0,
+                    explanation: "يمكننا صنع دفاتر أو ألعاب أو حتى ملابس من المواد المعاد تدويرها!"
+                }
+            ]
+        };
+
+        const translations = {
+            en: {
+                logoTitle: "🌱 Green Sprouts",
+                navHome: "Home",
+                navLessons: "Lessons",
+                navGames: "Games",
+                navIdeas: "Ideas",
+                heroTitle: "The Ultimate Recycling Guide",
+                heroText: "Watch, learn, and become a recycling superhero! 🌍♻️",
+                videoTitle: "About This Lesson",
+                videoDesc1: "In this video, you'll learn everything about recycling - from sorting your waste to understanding what happens to recycled materials.",
+                videoDesc2: "Discover how paper, plastic, glass, and metal get transformed into new products, and learn why recycling is so important for our planet.",
+                startQuiz: "Start Quiz 🎮",
+                quizTitle: "♻️ Recycling Quiz",
+                commentsTitle: "Send us a comment",
+                placeholderName: "Your name",
+                placeholderComment: "Your comment",
+                submitBtn: "Send",
+                footerText: "&copy; 2025 Green Sprouts. All rights reserved.",
+                checkAnswer: "Check Answer",
+                nextQuestion: "Next Question",
+                finishQuiz: "Finish Quiz",
+                yourScore: "Your Score:",
+                restart: "Play Again",
+                questionProgress: "Question {current} of {total}"
+            },
+            ar: {
+                logoTitle: "🌱 براعم خضراء",
+                navHome: "الرئيسية",
+                navLessons: "دروس",
+                navGames: "ألعاب",
+                navIdeas: "أفكار",
+                navProfile: "الملف الشخصي",
+                heroTitle: "الدليل النهائي لإعادة التدوير",
+                heroText: "شاهد، تعلم، وكن بطلاً في إعادة التدوير! 🌍♻️",
+                videoTitle: "عن هذا الدرس",
+                videoDesc1: "في هذا الفيديو، ستتعلم كل شيء عن إعادة التدوير - من فرز النفايات إلى فهم ما يحدث للمواد المعاد تدويرها.",
+                videoDesc2: "اكتشف كيف تتحول الورق والبلاستيك والزجاج والمعادن إلى منتجات جديدة، وتعرف على أهمية إعادة التدوير لكوكبنا.",
+                startQuiz: "ابدأ الاختبار 🎮",
+                quizTitle: "♻️ اختبار إعادة التدوير",
+                commentsTitle: "أرسل لنا تعليقًا",
+                placeholderName: "اسمك",
+                placeholderComment: "تعليقك",
+                submitBtn: "إرسال",
+                footerText: "&copy; 2025 براعم خضراء. جميع الحقوق محفوظة.",
+                checkAnswer: "تحقق من الإجابة",
+                nextQuestion: "السؤال التالي",
+                finishQuiz: "إنهاء الاختبار",
+                yourScore: "نتيجتك:",
+                restart: "العب مرة أخرى",
+                questionProgress: "السؤال {current} من {total}"
+            }
+        };
+
+        let currentLang = 'en';
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOptionIndex = null;
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            const t = translations[lang];
+
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+
+            const ids = [
+                'logo-title', 'nav-home', 'nav-lessons', 'nav-games', 'nav-ideas',
+                'hero-title', 'hero-text', 'video-title', 'video-desc1', 'video-desc2',
+                'openQuizBtn', 'quiz-title', 'comments-title', 'submit-btn', 'nav-profile'
+            ];
+
+            const idMap = {
+                'openQuizBtn': 'startQuiz',
+                'submit-btn': 'submitBtn'
+            };
+
+            ids.forEach(id => {
+                const key = idMap[id] || id.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                if (t[key]) {
+                    const el = document.getElementById(id);
+                    if (el) el.innerText = t[key];
+                }
+            });
+
+            document.getElementById('footer-text').innerHTML = t.footerText;
+            document.getElementById('name').placeholder = t.placeholderName;
+            document.getElementById('comment').placeholder = t.placeholderComment;
+
+            if (document.getElementById("quizModal").style.display === "block") {
+                renderQuestion();
+            }
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('quiz-container');
+            const questions = quizData[currentLang];
+            const t = translations[currentLang];
+
+            if (currentQuestionIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            const q = questions[currentQuestionIndex];
+            selectedOptionIndex = null;
+
+            let html = `
+        <div class="quiz-progress">${t.questionProgress.replace('{current}', currentQuestionIndex + 1).replace('{total}', questions.length)}</div>
+        <div class="question-text">${q.question}</div>
+        <ul class="options-list">
+          ${q.options.map((opt, idx) => `
+            <li class="option-item" onclick="selectOption(${idx})" id="opt-${idx}">${opt}</li>
+          `).join('')}
+        </ul>
+        <div class="explanation" id="explanation">${q.explanation}</div>
+        <div class="quiz-controls">
+          <button id="action-btn" class="action-btn" onclick="checkAnswer()" disabled>${t.checkAnswer}</button>
+        </div>
+      `;
+            container.innerHTML = html;
+        }
+
+        function selectOption(idx) {
+            if (document.getElementById('action-btn').innerText !== translations[currentLang].checkAnswer) return;
+
+            selectedOptionIndex = idx;
+            document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+            document.getElementById(`opt-${idx}`).classList.add('selected');
+            document.getElementById('action-btn').disabled = false;
+        }
+
+        function checkAnswer() {
+            const questions = quizData[currentLang];
+            const q = questions[currentQuestionIndex];
+            const t = translations[currentLang];
+            const btn = document.getElementById('action-btn');
+
+            if (btn.innerText === t.checkAnswer) {
+                const isCorrect = selectedOptionIndex === q.correct;
+                const options = document.querySelectorAll('.option-item');
+
+                options[selectedOptionIndex].classList.remove('selected');
+                if (isCorrect) {
+                    options[selectedOptionIndex].classList.add('correct');
+                    score++;
+                    document.getElementById('goodSound').play();
+                } else {
+                    options[selectedOptionIndex].classList.add('wrong');
+                    options[q.correct].classList.add('correct');
+                    document.getElementById('badSound').play();
+                }
+
+                document.getElementById('explanation').style.display = 'block';
+                btn.innerText = (currentQuestionIndex === questions.length - 1) ? t.finishQuiz : t.nextQuestion;
+            } else {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            const container = document.getElementById('quiz-container');
+            const t = translations[currentLang];
+            const total = quizData[currentLang].length;
+
+            let message = "";
+            let color = "";
+            if (score === total) {
+                message = "🎉 SUPER! You are a Recycling Hero!";
+                color = "green";
+            } else if (score > total / 2) {
+                message = "✨ Great job! Keep it up!";
+                color = "orange";
+            } else {
+                message = "💪 Good try! Watch the video again to learn more.";
+                color = "#333";
+            }
+
+            if (currentLang === 'ar') {
+                if (score === total) message = "🎉 رائع! أنت بطل إعادة التدوير!";
+                else if (score > total / 2) message = "✨ عمل رائع! استمر في ذلك!";
+                else message = "💪 محاولة جيدة! شاهد الفيديو مرة أخرى لمعرفة المزيد.";
+            }
+
+            container.innerHTML = `
+        <div class="quiz-result-final">
+          <h2>${t.yourScore} ${score} / ${total}</h2>
+          <p style="color: ${color}; font-weight: bold; margin: 20px 0;">${message}</p>
+          <button class="action-btn" onclick="startQuiz()">${t.restart}</button>
+        </div>
+      `;
+        }
+
+        const modal = document.getElementById("quizModal");
+        const btn = document.getElementById("openQuizBtn");
+        const span = document.getElementById("closeQuiz");
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+            startQuiz();
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+function toggleMenu() {
+    const menu = document.querySelector("nav ul");
+    menu.classList.toggle("mobile-active");
+}
+    </script>
+   
+
+</body>
+
+</html>

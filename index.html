@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Sprouts</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Green Sprouts logo" />
+            <h1 id="logo-title">🌱 Green Sprouts</h1>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html" id="nav-home" class="active">Home</a></li>
+                <li><a href="lesson.html" id="nav-lessons">Lessons</a></li>
+                <li><a href="games.html" id="nav-games">Games</a></li>
+                <li><a href="idea.html" id="nav-ideas">Ideas</a></li>
+
+            </ul>
+        </nav>
+        <!-- Hamburger Button -->
+<div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+
+        <div class="lang-switcher">
+            <button class="lang" id="lang-en" onclick="setLanguage('en')">English</button>
+            <button class="lang" id="lang-ar" onclick="setLanguage('ar')">العربية</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome" id="home">
+            <video id="background-video" class="background-video" src="Design_sans_titre.mp4" muted playsinline
+                loop></video>
+
+            <div class="welcome-inner">
+                <div class="welcome-left">
+                    <h1 id="title">Welcome to Green Sprouts!</h1>
+                    <h3 id="subtitle">Let's start</h3>
+
+                    <div class="buttons">
+                        <a href="login.html" class="fun-btn" id="login-btn">Login</a>
+                        <a href="signup.html" class="fun-btn" id="signup-btn">Sign Up</a>
+                    </div>
+                </div>
+
+                <div class="welcome-right">
+                    <button class="play-stop-btn" id="play-stop-btn" onclick="toggleMedia()">
+                        <svg viewBox="0 0 24 24" id="play-icon">
+                            <polygon points="5,3 19,12 5,21"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-us">
+            <div class="titre">
+                <h2 id="why-title">Why choose Green Sprouts?</h2>
+            </div>
+            <div class="reasons">
+                <div class="reason-card">
+                    <img src="fun.jfif" alt="Fun Learning" />
+                    <h3 id="reason1-title">Fun Learning</h3>
+                    <p id="reason1-text">Engaging activities that make learning enjoyable.</p>
+                </div>
+
+                <div class="reason-card">
+                    <img src="safe.webp" alt="Safe Environment" />
+                    <h3 id="reason2-title">Safe Environment</h3>
+                    <p id="reason2-text">A secure platform designed for kids' safety.</p>
+                </div>
+
+                <div class="reason-card">
+                    <img src="Creative_Exploration.jpg" alt="Creative Exploration" />
+                    <h3 id="reason3-title">Creative Exploration</h3>
+                    <p id="reason3-text">Encouraging imagination through interactive content.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2 id="testimonials-title">What Our Users Say 🌿</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p id="test1">"Green Sprouts has made learning about the environment so much fun for my kids!"</p>
+                    <h4>- Sarah K.</h4>
+                </div>
+                <div class="testimonial">
+                    <p id="test2">"I love how safe and engaging the platform is. My children are always excited to log
+                        in!"</p>
+                    <h4>- Mark T.</h4>
+                </div>
+                <div class="testimonial">
+                    <p id="test3">"The creative activities have sparked my child's imagination and interest in
+                        sustainability."</p>
+                    <h4>- Emily R.</h4>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-comments">
+                <h3 id="comments-title">Send us a comment</h3>
+                <form id="comment-form">
+                    <input type="text" id="name" placeholder="Your name" required />
+                    <textarea id="comment" placeholder="Your comment" required></textarea>
+                    <button id="submit-btn" type="submit" class="fun-btn">Send</button>
+                </form>
+            </div>
+            <p id="footer-text">&copy; 2025 Green Sprouts. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        const translations = {
+            en: {
+                logoTitle: "🌱 Green Sprouts",
+                navHome: "Home",
+                navLessons: "Lessons",
+                navGames: "Games",
+                navIdeas: "Ideas",
+                title: "Welcome to Green Sprouts!",
+                subtitle: "Let's start",
+                login: "Login",
+                signup: "Sign Up",
+                whyTitle: "Why choose Green Sprouts?",
+                reason1Title: "Fun Learning",
+                reason1Text: "Engaging activities that make learning enjoyable.",
+                reason2Title: "Safe Environment",
+                reason2Text: "A secure platform designed for kids' safety.",
+                reason3Title: "Creative Exploration",
+                reason3Text: "Encouraging imagination through interactive content.",
+                testimonialsTitle: "What Our Users Say 🌿",
+                test1: "\"Green Sprouts has made learning about the environment so much fun for my kids!\"",
+                test2: "\"I love how safe and engaging the platform is. My children are always excited to log in!\"",
+                test3: "\"The creative activities have sparked my child's imagination and interest in sustainability.\"",
+                commentsTitle: "Send us a comment",
+                placeholderName: "Your name",
+                placeholderComment: "Your comment",
+                submitBtn: "Send",
+                footerText: "&copy; 2025 Green Sprouts. All rights reserved."
+            },
+            ar: {
+                logoTitle: "🌱 براعم خضراء",
+                navHome: "الرئيسية",
+                navLessons: "دروس",
+                navGames: "ألعاب",
+                navIdeas: "أفكار",
+                title: "مرحبًا بكم في براعم الخضراء!",
+                subtitle: "هيا نبدأ",
+                login: "تسجيل الدخول",
+                signup: "إنشاء حساب",
+                whyTitle: "لماذا تختار براعم الخضراء؟",
+                reason1Title: "تعلم ممتع",
+                reason1Text: "أنشطة ممتعة تجعل التعلم مسليًا للأطفال.",
+                reason2Title: "بيئة آمنة",
+                reason2Text: "منصة آمنة مصممة لحماية الأطفال.",
+                reason3Title: "استكشاف إبداعي",
+                reason3Text: "تشجيع الخيال من خلال محتوى تفاعلي.",
+                testimonialsTitle: "آراء مستخدمينا 🌿",
+                test1: "\"براعم الخضراء جعلت التعلم عن البيئة ممتعًا جدًا لأطفالي!\"",
+                test2: "\"أحب مدى أمان وتفاعل المنصة. أطفالي دائماً متحمسون للدخول!\"",
+                test3: "\"الأنشطة الإبداعية أشعلت خيال طفلي واهتمامه بالاستدامة.\"",
+                commentsTitle: "أرسل لنا تعليق",
+                placeholderName: "اسمك",
+                placeholderComment: "تعليقك",
+                submitBtn: "إرسال",
+                footerText: "&copy; 2025 براعم الخضراء. جميع الحقوق محفوظة."
+            }
+        };
+
+        let currentLang = 'en';
+        let isPlaying = false;
+        const audio = new Audio();
+        const backgroundVideo = document.getElementById("background-video");
+        const playStopBtn = document.getElementById("play-stop-btn");
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Direction and Fonts
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+
+            // Update Text
+            document.getElementById('logo-title').innerText = t.logoTitle;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-lessons').innerText = t.navLessons;
+            document.getElementById('nav-games').innerText = t.navGames;
+            document.getElementById('nav-ideas').innerText = t.navIdeas;
+            document.getElementById('title').innerText = t.title;
+            document.getElementById('subtitle').innerText = t.subtitle;
+            document.getElementById('login-btn').innerText = t.login;
+            document.getElementById('signup-btn').innerText = t.signup;
+            document.getElementById('why-title').innerText = t.whyTitle;
+            document.getElementById('reason1-title').innerText = t.reason1Title;
+            document.getElementById('reason1-text').innerText = t.reason1Text;
+            document.getElementById('reason2-title').innerText = t.reason2Title;
+            document.getElementById('reason2-text').innerText = t.reason2Text;
+            document.getElementById('reason3-title').innerText = t.reason3Title;
+            document.getElementById('reason3-text').innerText = t.reason3Text;
+            document.getElementById('testimonials-title').innerText = t.testimonialsTitle;
+            document.getElementById('test1').innerText = t.test1;
+            document.getElementById('test2').innerText = t.test2;
+            document.getElementById('test3').innerText = t.test3;
+            document.getElementById('comments-title').innerText = t.commentsTitle;
+            document.getElementById('name').placeholder = t.placeholderName;
+            document.getElementById('comment').placeholder = t.placeholderComment;
+            document.getElementById('submit-btn').innerText = t.submitBtn;
+            document.getElementById('footer-text').innerHTML = t.footerText;
+
+            // Save language preference
+            localStorage.setItem('lang', lang);
+
+            // Stop media on lang change
+            stopMedia();
+        }
+
+        function toggleMedia() {
+            if (isPlaying) {
+                stopMedia();
+            } else {
+                startMedia();
+            }
+        }
+
+        function startMedia() {
+            if (currentLang === "en") audio.src = "welcomee.mp3";
+            else audio.src = "marhaban.mp3";
+
+            backgroundVideo.currentTime = 0;
+            backgroundVideo.play();
+            audio.currentTime = 0;
+            audio.play();
+            isPlaying = true;
+
+            // Pause Icon
+            playStopBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="5" height="16"></rect><rect x="13" y="4" width="5" height="16"></rect></svg>';
+        }
+
+        function stopMedia() {
+            backgroundVideo.pause();
+            backgroundVideo.currentTime = 0;
+            audio.pause();
+            audio.currentTime = 0;
+            isPlaying = false;
+
+            // Play Icon
+            playStopBtn.innerHTML = '<svg viewBox="0 0 24 24" id="play-icon"><polygon points="5,3 19,12 5,21"></polygon></svg>';
+        }
+
+        // Initialize - Load saved language preference
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLanguage(savedLang);
+    </script>
+    <script>
+function toggleMenu() {
+    const menu = document.querySelector("nav ul");
+    menu.classList.toggle("mobile-active");
+}
+</script>
+
+</body>
+
+</html>

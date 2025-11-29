@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style2.css">
+  <title>Green Sprouts - Login</title>
+  <style>
+    /* Specific styles for login page if needed, otherwise using style2.css */
+    .hero {
+      background-image: url('unnamed.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo" aria-hidden="false">
+      <img src="logo.png" alt="Green Sprouts logo" id="logo-img" />
+      <h1 id="logo-title" data-key="logo">🌱 Green Sprouts</h1>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html" id="nav-home" class="active" data-key="navHome">Home</a></li>
+        <li><a href="lesson.html" id="nav-lessons" data-key="navLessons">Lessons</a></li>
+        <li><a href="games.html" id="nav-games" data-key="navGames">Games</a></li>
+        <li><a href="idea.html" id="nav-ideas" data-key="navIdeas">Ideas</a></li>
+      </ul>
+    </nav>
+
+    <div class="lang-switcher" aria-hidden="false">
+      <button class="lang active" id="lang-en" aria-pressed="true">
+        English
+      </button>
+      <button class="lang" id="lang-ar" aria-pressed="false">العربية</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container hero-container">
+        <div class="welcome-form-container">
+          <h2 data-key="formTitle">Welcome Back!</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label data-key="formEmail">Email:</label>
+              <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+              <label data-key="formPassword">Password:</label>
+              <input type="password" id="password" required>
+            </div>
+
+            <button type="submit" class="btn" data-key="formButton">Log In</button>
+            <div class="already-account">
+              <p data-key="noAccountText">Don't have an account?</p>
+              <a href="signup.html" class="btn login-link" data-key="noAccountButton">Sign Up</a>
+            </div>
+          </form>
+        </div>
+
+        <div class="welcome-avatar-container">
+          <img src="sprouty.png" class="mascot-avatar" alt="Sprouty Mascot">
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-comments">
+        <h3 id="comments-title" data-key="commentsTitle">Send us a comment</h3>
+        <form id="comment-form">
+          <input type="text" id="name-footer" placeholder="Your name" required />
+          <textarea id="comment" placeholder="Your comment" required></textarea>
+          <button id="submit-btn" type="submit" class="fun-btn" data-key="submitBtn">Send</button>
+        </form>
+      </div>
+      <p id="footer-text" data-key="footerText">&copy; 2025 Green Sprouts. All rights reserved.</p>
+    </footer>
+  </main>
+  <script>
+    // Buttons
+    const btnEN = document.getElementById("lang-en");
+    const btnAR = document.getElementById("lang-ar");
+
+    // All elements with data-key
+    const translatable = document.querySelectorAll("[data-key]");
+    // Also handle placeholders
+    const nameFooter = document.getElementById("name-footer");
+    const commentTextarea = document.getElementById("comment");
+
+    const translations = {
+      en: {
+        logo: "🌱 Green Sprouts",
+        navHome: "Home",
+        navLessons: "Lessons",
+        navGames: "Games",
+        navIdeas: "Ideas",
+
+        formTitle: "Welcome Back!",
+        formEmail: "Email:",
+        formPassword: "Password:",
+        formButton: "Log In",
+
+        footerText: "© 2025 Green Sprouts. All rights reserved.",
+        noAccountText: "Don't have an account?",
+        noAccountButton: "Sign Up",
+        commentsTitle: "Send us a comment",
+        submitBtn: "Send",
+        namePlaceholder: "Your name",
+        commentPlaceholder: "Your comment",
+
+        dir: "ltr",
+        lang: "en"
+      },
+
+      ar: {
+        logo: "🌱 براعم خضراء",
+        navHome: "الرئيسية",
+        navLessons: "دروس",
+        navGames: "ألعاب",
+        navIdeas: "أفكار",
+
+        formTitle: "مرحباً بعودتك!",
+        formEmail: "البريد الإلكتروني:",
+        formPassword: "كلمة المرور:",
+        formButton: "تسجيل الدخول",
+
+        footerText: "© 2025 براعم خضراء. جميع الحقوق محفوظة.",
+        noAccountText: "ليس لديك حساب؟",
+        noAccountButton: "إنشاء حساب",
+        commentsTitle: "أرسل لنا تعليق",
+        submitBtn: "إرسال",
+        namePlaceholder: "اسمك",
+        commentPlaceholder: "تعليقك",
+
+        dir: "rtl",
+        lang: "ar"
+      }
+    };
+
+    // Translation function
+    function setLanguage(lang) {
+      const t = translations[lang];
+
+      translatable.forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (t[key]) {
+          el.textContent = t[key];
+        }
+      });
+
+      // Handle placeholders
+      if (nameFooter) nameFooter.placeholder = t.namePlaceholder;
+      if (commentTextarea) commentTextarea.placeholder = t.commentPlaceholder;
+
+      document.body.dir = t.dir;
+      localStorage.setItem("lang", lang);
+    }
+
+    // Buttons
+    btnEN.addEventListener("click", () => setLanguage("en"));
+    btnAR.addEventListener("click", () => setLanguage("ar"));
+
+    // Load saved language
+    const saved = localStorage.getItem("lang") || "en";
+    setLanguage(saved);
+  </script>
+</body>
+
+</html>

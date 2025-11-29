@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Green Sprouts</title>
+  <link rel="stylesheet" href="styleprofile.css">
+
+</head>
+
+<body>
+
+  <header>
+    <div class="logo" id="logo-text">
+      <img src="logo.png" alt="logo" />
+      <h1 id="logo-title">🌱 Green Sprouts</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="lesson.html" id="nav-lessons">Lessons</a></li>
+        <li><a href="games.html" id="nav-games">Games</a></li>
+        <li><a href="idea.html" id="nav-ideas">Ideas</a></li>
+        <li><a href="profile.html" id="nav-profile" class="active">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang" id="lang-en" onclick="setLanguage('en')">English</button>
+      <button class="lang" id="lang-ar" onclick="setLanguage('ar')">العربية</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2 id="hero-title">My Profile</h2>
+      <p id="hero-text">Welcome back, Little Explorer! Ready for a new adventure?</p>
+    </section>
+
+    <div class="profile-card">
+      <div class="profile-avatar">
+        <span role="img" aria-label="Lion">🦁</span>
+      </div>
+      <div class="profile-details">
+        <h2 id="profile-name">Amir</h2>
+        <div class="profile-stats">
+          <div class="stat-item">
+            <span class="stat-label" id="label-age">Age</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label" id="label-gender">Gender</span>
+            <span class="stat-value" id="val-gender">BOY</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label" id="label-score">Score</span>
+            <span class="stat-value">85</span>
+          </div>
+        </div>
+        <button id="edit-profile-btn">Edit Profile</button>
+      </div>
+    </div>
+
+    <section class="actions-section">
+      <h2 class="section-title" id="section-title">What do you want to do?</h2>
+      <div class="grid">
+        <!-- Learn -->
+        <div class="card">
+          <img src="leçons.jpg" alt="Lessons">
+          <div class="card-content">
+            <h3 id="card-learn-title">Learn</h3>
+            <p id="card-learn-text">Learn about the environment and how to protect it.</p>
+            <a href="lesson.html" class="action-btn" id="btn-learn">Start Learning</a>
+          </div>
+        </div>
+
+        <!-- Play -->
+        <div class="card">
+          <img src="jeux.jpg" alt="Games">
+          <div class="card-content">
+            <h3 id="card-play-title">Play</h3>
+            <p id="card-play-text">Play games to learn about the environment and how to protect it.</p>
+            <a href="games.html" class="action-btn" id="btn-play">Play Games</a>
+          </div>
+        </div>
+
+        <!-- Idea -->
+        <div class="card">
+          <img src="idee.jpg" alt="Ideas">
+          <div class="card-content">
+            <h3 id="card-idea-title">Idea</h3>
+            <p id="card-idea-text">Share your ideas to help protect the environment.</p>
+            <a href="idea.html" class="action-btn" id="btn-idea">See Ideas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-comments">
+      <h3 id="comments-title">Send us a comment</h3>
+      <form id="comment-form">
+        <input type="text" id="name" placeholder="Your name" required />
+        <textarea id="comment" placeholder="Your comment" required></textarea>
+        <button id="submit-btn" type="submit" class="fun-btn">Send</button>
+      </form>
+    </div>
+    <p id="footer-text">&copy; 2025 Green Sprouts. All rights reserved.</p>
+  </footer>
+
+  <!-- Edit Profile Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeEditModal()">&times;</span>
+      <h2 id="modal-title">Edit Profile</h2>
+      <form id="edit-form" onsubmit="saveProfile(event)">
+        <div class="form-group">
+          <label for="edit-name" id="label-edit-name">Name</label>
+          <input type="text" id="edit-name" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-age" id="label-edit-age">Age</label>
+          <input type="number" id="edit-age" required min="1" max="99">
+        </div>
+        <div class="form-group">
+          <label id="label-choose-avatar">Choose Avatar</label>
+          <div class="avatar-selection">
+            <span class="avatar-option" onclick="selectAvatar('🦁')">🦁</span>
+            <span class="avatar-option" onclick="selectAvatar('🐯')">🐯</span>
+            <span class="avatar-option" onclick="selectAvatar('🐼')">🐼</span>
+            <span class="avatar-option" onclick="selectAvatar('🐨')">🐨</span>
+            <span class="avatar-option" onclick="selectAvatar('🦊')">🦊</span>
+          </div>
+          <input type="hidden" id="selected-avatar" value="🦁">
+        </div>
+        <button type="submit" class="save-btn" id="btn-save">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        logoTitle: "🌱 Green Sprouts",
+        navHome: "Home",
+        navLessons: "Lessons",
+        navGames: "Games",
+        navIdeas: "Ideas",
+        navProfile: "Profile",
+        heroTitle: "My Profile",
+        heroText: "Welcome back, Little Explorer! Ready for a new adventure?",
+        labelAge: "Age",
+        labelGender: "Gender",
+        valGender: "BOY",
+        labelScore: "Score",
+        sectionTitle: "What do you want to do?",
+        cardLearnTitle: "Learn",
+        cardLearnText: "Learn about the environment and how to protect it.",
+        btnLearn: "Start Learning",
+        cardPlayTitle: "Play",
+        cardPlayText: "Play games to learn about the environment and how to protect it.",
+        btnPlay: "Play Games",
+        cardIdeaTitle: "Idea",
+        cardIdeaText: "Share your ideas to help protect the environment.",
+        btnIdea: "See Ideas",
+        commentsTitle: "Send us a comment",
+        placeholderName: "Your name",
+        placeholderComment: "Your comment",
+        submitBtn: "Send",
+        footerText: "&copy; 2025 Green Sprouts. All rights reserved.",
+        editProfile: "Edit Profile",
+        modalTitle: "Edit Profile",
+        labelEditName: "Name",
+        labelEditAge: "Age",
+        labelChooseAvatar: "Choose Avatar",
+        btnSave: "Save Changes"
+      },
+      ar: {
+        logoTitle: "🌱 براعم خضراء",
+        navHome: "الرئيسية",
+        navLessons: "دروس",
+        navGames: "ألعاب",
+        navIdeas: "أفكار",
+        navProfile: "الملف الشخصي",
+        heroTitle: "ملفي الشخصي",
+        heroText: "مرحباً بعودتك أيها المستكشف الصغير! هل أنت مستعد لمغامرة جديدة؟",
+        labelAge: "العمر",
+        labelGender: "الجنس",
+        valGender: "ولد",
+        labelScore: "النقاط",
+        sectionTitle: "ماذا تريد أن تفعل؟",
+        cardLearnTitle: "تعلم",
+        cardLearnText: "تعلم عن البيئة وكيفية حمايتها.",
+        btnLearn: "ابدأ التعلم",
+        cardPlayTitle: "العب",
+        cardPlayText: "العب ألعاباً لتعلم عن البيئة وكيفية حمايتها.",
+        btnPlay: "العب الألعاب",
+        cardIdeaTitle: "فكرة",
+        cardIdeaText: "شارك أفكارك للمساعدة في حماية البيئة.",
+        btnIdea: "شاهد الأفكار",
+        commentsTitle: "أرسل لنا تعليقًا",
+        placeholderName: "اسمك",
+        placeholderComment: "تعليقك",
+        submitBtn: "إرسال",
+        footerText: "&copy; 2025 براعم خضراء. جميع الحقوق محفوظة.",
+        editProfile: "تعديل الملف الشخصي",
+        modalTitle: "تعديل الملف الشخصي",
+        labelEditName: "الاسم",
+        labelEditAge: "العمر",
+        labelChooseAvatar: "اختر صورة رمزية",
+        btnSave: "حفظ التغييرات"
+      }
+    };
+
+    function setLanguage(lang) {
+      const t = translations[lang];
+
+      if (lang === 'ar') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+      } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+      }
+      document.getElementById('logo-title').innerText = t.logoTitle;
+      document.getElementById('nav-home').innerText = t.navHome;
+      document.getElementById('nav-lessons').innerText = t.navLessons;
+      document.getElementById('nav-games').innerText = t.navGames;
+      document.getElementById('nav-ideas').innerText = t.navIdeas;
+      document.getElementById('nav-profile').innerText = t.navProfile;
+
+      document.getElementById('hero-title').innerText = t.heroTitle;
+      document.getElementById('hero-text').innerText = t.heroText;
+
+      document.getElementById('label-age').innerText = t.labelAge;
+      document.getElementById('label-gender').innerText = t.labelGender;
+      document.getElementById('val-gender').innerText = t.valGender;
+      document.getElementById('label-score').innerText = t.labelScore;
+      document.getElementById('edit-profile-btn').innerText = t.editProfile;
+
+      document.getElementById('section-title').innerText = t.sectionTitle;
+
+      document.getElementById('card-learn-title').innerText = t.cardLearnTitle;
+      document.getElementById('card-learn-text').innerText = t.cardLearnText;
+      document.getElementById('btn-learn').innerText = t.btnLearn;
+
+      document.getElementById('card-play-title').innerText = t.cardPlayTitle;
+      document.getElementById('card-play-text').innerText = t.cardPlayText;
+      document.getElementById('btn-play').innerText = t.btnPlay;
+
+      document.getElementById('card-idea-title').innerText = t.cardIdeaTitle;
+      document.getElementById('card-idea-text').innerText = t.cardIdeaText;
+      document.getElementById('btn-idea').innerText = t.btnIdea;
+
+      document.getElementById('comments-title').innerText = t.commentsTitle;
+      document.getElementById('name').placeholder = t.placeholderName;
+      document.getElementById('comment').placeholder = t.placeholderComment;
+      document.getElementById('submit-btn').innerText = t.submitBtn;
+      document.getElementById('footer-text').innerHTML = t.footerText;
+
+      // Modal translations
+      document.getElementById('modal-title').innerText = t.modalTitle;
+      document.getElementById('label-edit-name').innerText = t.labelEditName;
+      document.getElementById('label-edit-age').innerText = t.labelEditAge;
+      document.getElementById('label-choose-avatar').innerText = t.labelChooseAvatar;
+      document.getElementById('btn-save').innerText = t.btnSave;
+
+      // Save language preference
+      localStorage.setItem('lang', lang);
+    }
+
+    // Profile Editing Logic
+    const editBtn = document.getElementById('edit-profile-btn');
+    const modal = document.getElementById('editModal');
+    const avatarSpan = document.querySelector('.profile-avatar span');
+    const nameEl = document.getElementById('profile-name');
+    const ageEl = document.querySelector('.stat-value'); // Assuming first stat-value is age
+
+    editBtn.onclick = function () {
+      modal.style.display = "flex";
+      document.getElementById('edit-name').value = nameEl.innerText;
+      document.getElementById('edit-age').value = ageEl.innerText;
+
+      // Highlight current avatar
+      const currentAvatar = avatarSpan.getAttribute('aria-label') || avatarSpan.innerText;
+      selectAvatar(currentAvatar);
+    }
+
+    function closeEditModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        closeEditModal();
+      }
+    }
+
+    function selectAvatar(avatar) {
+      document.getElementById('selected-avatar').value = avatar;
+      const options = document.querySelectorAll('.avatar-option');
+      options.forEach(opt => {
+        if (opt.innerText === avatar) {
+          opt.classList.add('selected');
+        } else {
+          opt.classList.remove('selected');
+        }
+      });
+    }
+
+    function saveProfile(event) {
+      event.preventDefault();
+      const newName = document.getElementById('edit-name').value;
+      const newAge = document.getElementById('edit-age').value;
+      const newAvatar = document.getElementById('selected-avatar').value;
+
+      if (newName) nameEl.innerText = newName;
+      if (newAge) ageEl.innerText = newAge;
+      if (newAvatar) {
+        avatarSpan.innerText = newAvatar;
+        avatarSpan.setAttribute('aria-label', newAvatar);
+      }
+
+      // Save to localStorage
+      const profileData = {
+        name: newName,
+        age: newAge,
+        avatar: newAvatar
+      };
+      localStorage.setItem('userProfile', JSON.stringify(profileData));
+
+      closeEditModal();
+    }
+
+    // Initialize
+    const savedLang = localStorage.getItem('lang') || 'en';
+    setLanguage(savedLang);
+
+    // Load saved profile
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      const data = JSON.parse(savedProfile);
+      if (data.name) nameEl.innerText = data.name;
+      if (data.age) ageEl.innerText = data.age;
+      if (data.avatar) {
+        avatarSpan.innerText = data.avatar;
+        avatarSpan.setAttribute('aria-label', data.avatar);
+      }
+    }
+    function toggleMenu() {
+      const menu = document.querySelector("nav ul");
+      menu.classList.toggle("mobile-active");
+    }
+  </script>
+
+</body>
+
+</html>
